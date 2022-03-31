@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Arial.spritefont</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/GameJam2022Song.mp3</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/GameJamBSong.mp3</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Grass.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Ground.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Health.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/MainCar.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Police1.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Police2.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/PoliceStation.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/RestrauntBurger.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/RestrauntClosed.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/RestrauntPizza.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/RestrauntSalad.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SHOption.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SLOption.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SpecialPolice1.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SpecialPolice2.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SSOption.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Street.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/UHOption.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/ULOption.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/USOption.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Wait.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Water1.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Water2.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
