@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System;
 using System.Collections.Generic;
 using System.Text;
 namespace GameJam2022
@@ -19,6 +20,7 @@ namespace GameJam2022
         private int worldWidth;
         private List<Police> policeList = new List<Police>();
         private List<SpecialPolice> specialPoliceList = new List<SpecialPolice>();
+        private List<Pickup> pickupList = new List<Pickup>();
         private int gameLevel = 0;
         private bool keyDownPressed = false;
         private bool keyUpPressed = false;
@@ -33,6 +35,9 @@ namespace GameJam2022
         private double grassTimer;
         private double stationTimer;
         private double specialTimer;
+        private double pickUpTimer;
+        private Random r = new Random();
+
 
         public MainGame()
         {
@@ -242,7 +247,7 @@ namespace GameJam2022
             {
                 popo.LoadContent(Content);
             }
-        }
+    }
 
         protected override void Update(GameTime gameTime)
         {
@@ -343,6 +348,12 @@ namespace GameJam2022
                     specialPoliceList.Add(new SpecialPolice(new Vector2(64 * 16, 64 * 16)));
                     specialPoliceList[specialPoliceList.Count - 1].LoadContent(Content);
                 }
+                pickUpTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (pickUpTimer > 5.0)
+                {
+                    pickUpTimer -= 5.0;
+                    pickupList.Add(new Pickup(new Vector2(r.Next(0, worldWidth * 64), r.Next(0, worldHeight * 64)), this));
+                }
 
                 foreach (TileMapBackground tile in tiles)
                 {
@@ -407,6 +418,15 @@ namespace GameJam2022
                         special.Stop = true;
                     }
                 }
+                for(int i = 0; i < pickupList.Count; i++)
+                {
+                    if(pickupList[i].Bounds.CollidesWith(player.Bounds))
+                    {
+                        health += 50;
+                        pickupList.RemoveAt(i);
+                        i--;
+                    }
+                }
                 for (int i = 0; i < policeList.Count; i++)
                 {
                     if (policeList[i].Bounds.CollidesWith(player.Bounds) && policeList[i].Stop == false)
@@ -450,6 +470,10 @@ namespace GameJam2022
                 foreach (SpecialPolice popo in specialPoliceList)
                 {
                     popo.Update(gameTime, player.Position);
+                }
+                foreach(Pickup pick in pickupList)
+                {
+                    pick.Update(gameTime);
                 }
                 if (health <= 0)
                 {
@@ -500,6 +524,7 @@ namespace GameJam2022
                 float offsetY = 300 - playerY;
 
                 Matrix transform = Matrix.CreateTranslation(offsetX, offsetY, 0);
+                Matrix transform3D = Matrix.CreateTranslation(offsetX, -offsetY, 0);
                 _spriteBatch.Begin(transformMatrix: transform);
                 GraphicsDevice.Clear(Color.CornflowerBlue);
                 for (int x = 0; x < worldWidth; x++)
@@ -545,6 +570,10 @@ namespace GameJam2022
                     _spriteBatch.DrawString(spriteFont, "Press Y to restart", new Vector2(playerX - 64, playerY - 32), Color.Red);
                 }
                 _spriteBatch.End();
+                foreach (Pickup pick in pickupList)
+                {
+                    pick.Draw(transform3D);
+                }
             }
             else if(gameLevel == 2)
             {
