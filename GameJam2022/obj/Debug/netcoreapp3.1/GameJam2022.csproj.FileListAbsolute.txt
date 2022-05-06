@@ -50,3 +50,7 @@ C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Cont
 C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\Wait.xnb
 C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\SpecialPolice1.xnb
 C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\SpecialPolice2.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\Pixel.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\SWAT.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\SWAT2.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Debug\netcoreapp3.1\Content\Spike.xnb

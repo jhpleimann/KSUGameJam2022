@@ -13,6 +13,8 @@ namespace GameJam2022
     {
         private Vector2 position;
 
+        public Vector2 Position => position;
+
         private BoundingCircle bounds;
 
         /// <summary>

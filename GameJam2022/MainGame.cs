@@ -16,10 +16,13 @@ namespace GameJam2022
         private Building[] buildings;
         private MenuSelector[] selectors;
         private MainPlayer player;
+        private MiniMap map;
         private int worldHeight;
         private int worldWidth;
         private List<Police> policeList = new List<Police>();
         private List<SpecialPolice> specialPoliceList = new List<SpecialPolice>();
+        private List<SWAT> swatList = new List<SWAT>();
+        private List<Spike> spikeList = new List<Spike>();
         private List<Pickup> pickupList = new List<Pickup>();
         private int gameLevel = 0;
         private bool keyDownPressed = false;
@@ -36,6 +39,8 @@ namespace GameJam2022
         private double stationTimer;
         private double specialTimer;
         private double pickUpTimer;
+        private double swatTimer;
+        private double spikeTimer;
         private Random r = new Random();
 
 
@@ -48,8 +53,9 @@ namespace GameJam2022
             worldWidth = 32;
             tiles = new TileMapBackground[worldWidth,worldHeight];
             backgroundTiles = new TileMapBackground[worldWidth, worldHeight];
+            map = new MiniMap(new Vector2(0,0), worldWidth, worldHeight);
             buildings = new Building[4];
-            selectors = new MenuSelector[3];
+            selectors = new MenuSelector[2];
             policeList.Add(new Police(new Vector2(4 * 64, 7 * 64)));
             policeList.Add(new Police(new Vector2(7 * 64, 7 * 64)));
             player = new MainPlayer(new Vector2(7 * 64, 4 * 64));
@@ -84,19 +90,16 @@ namespace GameJam2022
                     backgroundTiles[x, y].LoadContent(Content);
                 }
             }
+            map.LoadContent(Content);
 
             //Generate the menuselectors
-            selectors[0] = new MenuSelector(new Vector2(3 * 64, 64), 0);
+            selectors[0] = new MenuSelector(new Vector2(3 * 64, 2 * 64), 0);
             selectors[0].LoadContent(Content);
             selectors[0].IsSelected = true;
 
-            selectors[1] = new MenuSelector(new Vector2(3 * 64, 3 * 64), 1);
+            selectors[1] = new MenuSelector(new Vector2(3 * 64, 4 * 64), 1);
             selectors[1].LoadContent(Content);
             selectors[1].IsSelected = false;
-
-            selectors[2] = new MenuSelector(new Vector2(3 * 64, 5 * 64), 2);
-            selectors[2].LoadContent(Content);
-            selectors[2].IsSelected = false;
 
             //Generate the buildings
             buildings[0] = new Building(new Vector2(64 * 16, 64 * 16),0);
@@ -259,20 +262,20 @@ namespace GameJam2022
                 if (keyboardState.IsKeyDown(Keys.Up) && keyUpPressed == false)
                 {
                     keyUpPressed = true;
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         if (selectors[i].IsSelected)
                         {
                             selectors[i].IsSelected = false;
                             if (i <= 0)
                             {
-                                selectors[2].IsSelected = true;
+                                selectors[1].IsSelected = true;
                             }
                             else
                             {
                                 selectors[i - 1].IsSelected = true;
                             }
-                            i = 3;
+                            i = 2;
                         }
                     }
                 }
@@ -284,12 +287,12 @@ namespace GameJam2022
                 if (keyboardState.IsKeyDown(Keys.Down) && keyDownPressed == false)
                 {
                     keyDownPressed = true;
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         if (selectors[i].IsSelected)
                         {
                             selectors[i].IsSelected = false;
-                            if (i >= 2)
+                            if (i >= 1)
                             {
                                 selectors[0].IsSelected = true;
                             }
@@ -297,7 +300,7 @@ namespace GameJam2022
                             {
                                 selectors[i + 1].IsSelected = true;
                             }
-                            i = 3;
+                            i = 2;
                         }
                     }
                 }
@@ -308,7 +311,7 @@ namespace GameJam2022
 
                 if (keyboardState.IsKeyDown(Keys.Enter))
                 {
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         if (selectors[i].IsSelected)
                         {
@@ -318,12 +321,13 @@ namespace GameJam2022
                                     gameLevel = 2;
                                     break;
                                 case 1:
-                                    // code block
-                                    break;
-                                case 2:
                                     gameLevel = 1;
                                     MediaPlayer.Stop();
                                     MediaPlayer.Play(gameMusic);
+                                    stationTimer = 0;
+                                    specialTimer = 0;
+                                    pickUpTimer = 0;
+                                    grassTimer = 0;
                                     break;
                             }
                             i = 3;
@@ -348,15 +352,45 @@ namespace GameJam2022
                     specialPoliceList.Add(new SpecialPolice(new Vector2(64 * 16, 64 * 16)));
                     specialPoliceList[specialPoliceList.Count - 1].LoadContent(Content);
                 }
-                pickUpTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                if (pickUpTimer > 5.0)
+                swatTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (swatTimer > 45.0)
                 {
-                    pickUpTimer -= 5.0;
+                    swatTimer -= 45.0;
+                    swatList.Add(new SWAT(new Vector2(64 * 16, 64 * 16)));
+                    swatList[swatList.Count - 1].LoadContent(Content);
+                }
+                spikeTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (spikeTimer > 20.0)
+                {
+                    spikeTimer -= 20.0;
+                    foreach(SWAT swat in swatList)
+                    {
+                        spikeList.Add(new Spike(new Vector2(swat.Position.X, swat.Position.Y)));
+                        spikeList[spikeList.Count - 1].LoadContent(Content);
+                    }
+                }
+                spikeTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                pickUpTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (pickUpTimer > 20.0)
+                {
+                    pickUpTimer -= 20.0;
                     pickupList.Add(new Pickup(new Vector2(r.Next(0, worldWidth * 64), r.Next(0, worldHeight * 64)), this));
                 }
 
                 foreach (TileMapBackground tile in tiles)
                 {
+                    if (tile.imageNumber == 0)
+                    {
+                        for (int i = 0; i < pickupList.Count; i++)
+                        {
+                            if (pickupList[i].Bounds.CollidesWith(tile.Bounds))
+                            {
+                                pickupList.RemoveAt(i);
+                                i--;
+                                pickUpTimer = 21.0;
+                            }
+                        }
+                    }
                     if (tile.imageNumber == 0 && tile.Bounds.CollidesWith(player.Bounds))
                     {
                         //Add Game Over part here
@@ -366,6 +400,10 @@ namespace GameJam2022
                             popo.Endgame = true;
                         }
                         foreach (SpecialPolice popo in specialPoliceList)
+                        {
+                            popo.Endgame = true;
+                        }
+                        foreach (SWAT popo in swatList)
                         {
                             popo.Endgame = true;
                         }
@@ -418,9 +456,18 @@ namespace GameJam2022
                         special.Stop = true;
                     }
                 }
-                for(int i = 0; i < pickupList.Count; i++)
+                foreach (SWAT swat in swatList)
                 {
-                    if(pickupList[i].Bounds.CollidesWith(player.Bounds))
+                    if (swat.Bounds.CollidesWith(player.Bounds) && swat.Stop == false)
+                    {
+                        player.HitDirection = swat.Direction * 1.3f;
+                        player.Hit = true;
+                        swat.Stop = true;
+                    }
+                }
+                for (int i = 0; i < pickupList.Count; i++)
+                {
+                    if (pickupList[i].Bounds.CollidesWith(player.Bounds))
                     {
                         health += 50;
                         pickupList.RemoveAt(i);
@@ -441,6 +488,14 @@ namespace GameJam2022
                         {
                             policeList[i].Stop = true;
                         }
+                    }
+                }
+                for(int i = 0; i < spikeList.Count; i++)
+                {
+                    if(spikeList[i].Bounds.CollidesWith(player.Bounds))
+                    {
+                        player.Hit = true;
+                        spikeList.RemoveAt(i);
                     }
                 }
                 if (keyboardState.IsKeyDown(Keys.Y))
@@ -471,7 +526,11 @@ namespace GameJam2022
                 {
                     popo.Update(gameTime, player.Position);
                 }
-                foreach(Pickup pick in pickupList)
+                foreach (SWAT popo in swatList)
+                {
+                    popo.Update(gameTime, player.Position);
+                }
+                foreach (Pickup pick in pickupList)
                 {
                     pick.Update(gameTime);
                 }
@@ -483,6 +542,10 @@ namespace GameJam2022
                         popo.Endgame = true;
                     }
                     foreach (SpecialPolice popo in specialPoliceList)
+                    {
+                        popo.Endgame = true;
+                    }
+                    foreach (SWAT popo in swatList)
                     {
                         popo.Endgame = true;
                     }
@@ -532,15 +595,36 @@ namespace GameJam2022
                     for (int y = 0; y < worldHeight; y++)
                     {
                         tiles[x, y].Draw(gameTime, _spriteBatch);
+                        map.Map[x, y] = tiles[x, y].imageNumber;
                     }
+                }
+                foreach (Spike spike in spikeList)
+                {
+                    spike.Draw(gameTime, _spriteBatch);
+                    int x = (int)spike.Position.X / 64;
+                    int y = (int)spike.Position.Y / 64;
+                    map.Map[x, y] = 6;
                 }
                 foreach (Police popo in policeList)
                 {
                     popo.Draw(gameTime, _spriteBatch);
+                    int x = (int)popo.Position.X / 64;
+                    int y = (int)popo.Position.Y / 64;
+                    map.Map[x, y] = 6;
+                }
+                foreach (SWAT popo in swatList)
+                {
+                    popo.Draw(gameTime, _spriteBatch);
+                    int x = (int)popo.Position.X / 64;
+                    int y = (int)popo.Position.Y / 64;
+                    map.Map[x, y] = 6;
                 }
                 foreach (SpecialPolice popo in specialPoliceList)
                 {
                     popo.Draw(gameTime, _spriteBatch);
+                    int x = (int)popo.Position.X / 64;
+                    int y = (int)popo.Position.Y / 64;
+                    map.Map[x, y] = 6;
                 }
                 if (player.Endgame == false)
                 {
@@ -558,17 +642,32 @@ namespace GameJam2022
                 healthRectangle = new Rectangle(0, 0, (int)health, healthTexture.Height);
 
                 player.Draw(gameTime, _spriteBatch);
+                int pX = (int)player.Position.X / 64;
+                int pY = (int)player.Position.Y / 64;
+                map.Map[pX, pY] = 5;
                 foreach (Building build in buildings)
                 {
                     build.Draw(gameTime, _spriteBatch);
+                    int x = (int)build.Position.X / 64;
+                    int y = (int)build.Position.Y / 64;
+                    map.Map[x, y] = 4;
                 }
-                _spriteBatch.DrawString(spriteFont, score + "", new Vector2(playerX + 64 * 6, playerY - 64 * 4 - 32), Color.Gold);
-                _spriteBatch.Draw(healthTexture, new Vector2(playerX + 64 * 7 - health + 32, playerY + 64 * 2), healthRectangle, Color.White);
+                _spriteBatch.DrawString(spriteFont, score + "", new Vector2(playerX - 64 * 4 - 32, playerY - 64 * 4 - 32), Color.Gold);
+                _spriteBatch.Draw(healthTexture, new Vector2(playerX + 64 * 7 - health + 48, playerY - 64 * 4 - 40), healthRectangle, Color.White);
                 if (player.Endgame)
                 {
                     _spriteBatch.DrawString(spriteFont, "Game Over. Final Score: " + score, new Vector2(playerX - 64 * 2, playerY - 64 - 32), Color.Red);
                     _spriteBatch.DrawString(spriteFont, "Press Y to restart", new Vector2(playerX - 64, playerY - 32), Color.Red);
                 }
+                foreach (Pickup pick in pickupList)
+                {
+                    pick.Draw(transform3D);
+                    int x = (int)pick.Position.X / 64;
+                    int y = (int)pick.Position.Y / 64;
+                    map.Map[x, y] = 7;
+                }
+                map.Position = new Vector2(playerX + 64 * 5 + 48, playerY + 64 * 1 - 16);
+                map.Draw(_spriteBatch);
                 _spriteBatch.End();
                 foreach (Pickup pick in pickupList)
                 {
@@ -594,7 +693,10 @@ namespace GameJam2022
 
                 _spriteBatch.End();
             }
-            
+
+
+
+
 
             base.Draw(gameTime);
         }

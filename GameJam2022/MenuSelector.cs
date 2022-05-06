@@ -14,8 +14,8 @@ namespace GameJam2022
         private int imageNumber;
         private Texture2D textureSH;
         private Texture2D textureUH;
-        private Texture2D textureSL;
-        private Texture2D textureUL;
+        //private Texture2D textureSL;
+        //private Texture2D textureUL;
         private Texture2D textureSS;
         private Texture2D textureUS;
 
@@ -45,8 +45,8 @@ namespace GameJam2022
         {
             textureSH = content.Load<Texture2D>("SHOption");
             textureUH = content.Load<Texture2D>("UHOption");
-            textureSL = content.Load<Texture2D>("SLOption");
-            textureUL = content.Load<Texture2D>("ULOption");
+            //textureSL = content.Load<Texture2D>("SLOption");
+            //textureUL = content.Load<Texture2D>("ULOption");
             textureSS = content.Load<Texture2D>("SSOption");
             textureUS = content.Load<Texture2D>("USOption");
         }
@@ -78,25 +78,7 @@ namespace GameJam2022
                     spriteBatch.Draw(textureUH, Position, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0);
                 }
             }
-            else if (imageNumber == 1)
-            {
-                if(IsSelected)
-                {
-                    if (animationPose)
-                    {
-                        spriteBatch.Draw(textureUL, Position, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(textureSL, Position, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0);
-                    }
-                }
-                else
-                {
-                    spriteBatch.Draw(textureUL, Position, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0);
-                }
-            }
-            else if(imageNumber == 2)
+            else if(imageNumber == 1)
             {
                 if(IsSelected)
                 {

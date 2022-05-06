@@ -14,6 +14,7 @@ namespace GameJam2022
     {
         public int imageNumber { get; set; } = 0;
         private Vector2 position;
+        public Vector2 Position => position;
         private Texture2D texturePopo;
         private Texture2D textureBurg;
         private Texture2D textureSala;

@@ -11,6 +11,7 @@
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Ground.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Health.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/MainCar.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Pixel.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Police1.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Police2.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/PoliceStation.png</File>
@@ -22,8 +23,11 @@
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SLOption.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SpecialPolice1.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SpecialPolice2.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Spike.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SSOption.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Street.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SWAT.png</File>
+    <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/SWAT2.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/UHOption.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/ULOption.png</File>
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/USOption.png</File>
@@ -32,6 +36,10 @@
     <File>C:/Users/jplmn/source/repos/GameJam2022/GameJam2022/Content/Water2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
