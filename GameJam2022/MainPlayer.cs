@@ -112,7 +112,7 @@ namespace GameJam2022
                     Position += velocity * 3 * Nitro; 
                 }
             }
-            bounds.Center = Position - new Vector2(16, 16);
+            bounds.Center = Position;
             spriteBatch.Draw(texture, Position, null, Color.White, Angle, new Vector2(texture.Height / 2, texture.Width / 2), 1.0f, SpriteEffects.None, 0);
         }
     }

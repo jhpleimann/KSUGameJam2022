@@ -75,8 +75,6 @@ namespace GameJam2022
         /// <param name="gameTime">The GameTime</param>
         public void Update(GameTime gameTime, Vector2 target)
         {
-            keyboardState = Keyboard.GetState();
-
             Vector2 heading = target - Position;
 
             float d = heading.Length();
@@ -106,7 +104,7 @@ namespace GameJam2022
                     {
                         Position += direction * 2;
                     }
-                    bounds.Center = Position + new Vector2(16, 16);
+                    bounds.Center = Position;
                     if (direction.X < 0)
                     {
                         Angle = MathF.Atan(direction.Y / direction.X) - 60;

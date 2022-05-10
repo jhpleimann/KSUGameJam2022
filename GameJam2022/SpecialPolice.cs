@@ -92,7 +92,7 @@ namespace GameJam2022
                 if (!Stop)
                 {
                     Position += direction * 2.9f;
-                    bounds.Center = Position + new Vector2(16, 16);
+                    bounds.Center = Position;
                     if (direction.X < 0)
                     {
                         Angle = MathF.Atan(direction.Y / direction.X) - 60;

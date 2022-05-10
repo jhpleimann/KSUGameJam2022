@@ -50,3 +50,7 @@ C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\obj\Release\netcoreapp3.1\Ga
 C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\obj\Release\netcoreapp3.1\GameJam2022.pdb
 C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\obj\Release\netcoreapp3.1\GameJam2022.genruntimeconfig.cache
 C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\obj\Release\netcoreapp3.1\GameJam2022.csproj.AssemblyReference.cache
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Release\netcoreapp3.1\Content\Pixel.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Release\netcoreapp3.1\Content\Spike.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Release\netcoreapp3.1\Content\SWAT.xnb
+C:\Users\jplmn\source\repos\GameJam2022\GameJam2022\bin\Release\netcoreapp3.1\Content\SWAT2.xnb

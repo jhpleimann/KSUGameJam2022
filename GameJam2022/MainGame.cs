@@ -326,6 +326,7 @@ namespace GameJam2022
                                     MediaPlayer.Play(gameMusic);
                                     stationTimer = 0;
                                     specialTimer = 0;
+                                    
                                     pickUpTimer = 0;
                                     grassTimer = 0;
                                     break;
@@ -464,6 +465,13 @@ namespace GameJam2022
                         player.Hit = true;
                         swat.Stop = true;
                     }
+                    for (int j = 1; j < policeList.Count; j++)
+                    {
+                        if (swat.Bounds.CollidesWith(policeList[j].Bounds) && policeList[j].Stop == false)
+                        {
+                            swat.Stop = true;
+                        }
+                    }
                 }
                 for (int i = 0; i < pickupList.Count; i++)
                 {
@@ -489,6 +497,13 @@ namespace GameJam2022
                             policeList[i].Stop = true;
                         }
                     }
+                    for (int j = 1; j < swatList.Count; j++)
+                    {
+                        if (policeList[i].Bounds.CollidesWith(swatList[j].Bounds) && swatList[j].Stop == false)
+                        {
+                            policeList[i].Stop = true;
+                        }
+                    }
                 }
                 for(int i = 0; i < spikeList.Count; i++)
                 {
@@ -503,8 +518,11 @@ namespace GameJam2022
                     gameLevel = 0;
                     score = 0;
                     health = 200;
-                    policeList = new List<Police>();
-                    specialPoliceList = new List<SpecialPolice>();
+                    policeList.Clear();
+                    specialPoliceList.Clear();
+                    swatList.Clear();
+                    spikeList.Clear();
+                    pickupList.Clear();
                     policeList.Add(new Police(new Vector2(4 * 64, 7 * 64)));
                     policeList.Add(new Police(new Vector2(7 * 64, 7 * 64)));
                     player = new MainPlayer(new Vector2(7 * 64, 4 * 64));
